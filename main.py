@@ -1,14 +1,11 @@
-from fastapi import FastAPI, Request, status
-from fastapi.encoders import jsonable_encoder
-from fastapi.exceptions import RequestValidationError
-from fastapi.responses import JSONResponse
+from fastapi import FastAPI
 from user import controller as user_controller
 
 app = FastAPI()
 
 
 @app.get('/')
-async def root():
+async def index():
     return {'message': 'Hello World'}
 
 
