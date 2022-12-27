@@ -1,5 +1,5 @@
-from fastapi import APIRouter
-from . import model as user_model
+from fastapi import APIRouter, status, Form
+from .schema import User
 
 router = APIRouter(prefix='/api/v1/user')
 
@@ -14,6 +14,11 @@ async def details(userid: int):
     return {'user id': userid}
 
 
-@router.post('/create')
-async def create(user: user_model.User):
+@router.post('/create', status_code=status.HTTP_201_CREATED)
+async def create(user: User):
     return user
+
+
+@router.post('/login', status_code=status.HTTP_201_CREATED)
+async def login(username: str = Form(), password: str = Form()):
+    return {'username': username, 'password': password}
